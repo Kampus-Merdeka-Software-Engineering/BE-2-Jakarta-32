@@ -15,7 +15,7 @@ export const getUser = async(req, res) => {
 export const Register = async(req, res) => {
     const { name, email, password } = req.body
     
-    const findUser = await User.findAll({
+    const findUser = await User.findOne({
         where: {
             user_email: req.body.email
         }
