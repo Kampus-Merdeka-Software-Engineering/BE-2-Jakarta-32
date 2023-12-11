@@ -3,22 +3,25 @@ import db from "../config/database.js"
 
 const { DataTypes } = Sequelize
 
-const User = db.define('users', {
-    user_name: {
+const Berita = db.define('berita', {
+    kategori: {
         type: DataTypes.STRING
     },
-    user_email: {
+    author: {
         type: DataTypes.STRING
     },
-    user_password: {
+    title: {
         type: DataTypes.STRING
     },
-    user_subscribe: {
-        type: DataTypes.ENUM('TRUE', 'FALSE')
+    urlToImage: {
+        type: DataTypes.TEXT
+    },
+    content: {
+        type: DataTypes.TEXT
     }
 },
 {
     timestamps: true
 })
 
-export default User
+export default Berita

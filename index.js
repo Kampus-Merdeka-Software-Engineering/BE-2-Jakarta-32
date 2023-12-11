@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import bodyParser from "body-parser"
 import db from "./config/database.js"
 import User from "./models/user_models.js"
+import Berita from "./models/berita_models.js"
 import router from "./routes/index.js"
 
 dotenv.config()
@@ -13,6 +14,7 @@ try{
     await db.authenticate()
     console.log('Database connected...')
     await User.sync()
+    await Berita.sync()
 }catch (error){
     console.error(error)
 }
