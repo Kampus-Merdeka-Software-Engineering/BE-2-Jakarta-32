@@ -33,7 +33,8 @@ export const Register = async(req, res) => {
         await User.create({
             user_name: name,
             user_email: email,
-            user_password: hashedPassword
+            user_password: hashedPassword,
+            user_subscribe: 'FALSE'
         })
         res.status(201).json({ msg: "Registration successful" })
     } catch (error) {
@@ -87,3 +88,40 @@ export const Login = async (req, res) => {
         res.status(500).json({ msg: "Internal Server Error" })
     }
 }
+
+export const updatedSubscribe = async (req, res) => {
+    const name = req.body.name
+    if (name === "") {
+        return res.status(400).json({
+            message: "Username is null or undefined"
+        })
+    }
+    try {
+        await User.update(
+            { user_subscribe: 'true' },
+            {
+                where: {
+                    user_name: name,
+                    user_subscribe: 'false'
+                }
+            }
+        )
+        return res.status(200).json({ message: 'Berhasil Subscribe' });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: error
+        })
+    }
+}
+
+// const updatedRows = await User.update(
+//     { subscribe: 'TRUE' },
+//     {
+//         where: {
+//         email: email,
+//         subscribe: 'FALSE',
+//         },
+//     }
+    
+// )
